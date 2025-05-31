@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A5793DA2DEB16AB0010CBDC /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 3A5793D92DEB16AB0010CBDC /* ComposableArchitecture */; };
 		3A5793DD2DEB16EA0010CBDC /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3A5793DC2DEB16EA0010CBDC /* FirebaseCore */; };
 		3A5793DF2DEB16EA0010CBDC /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3A5793DE2DEB16EA0010CBDC /* FirebaseFirestore */; };
 		3A5793E12DEB16EA0010CBDC /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 3A5793E02DEB16EA0010CBDC /* FirebaseRemoteConfig */; };
+		3A7916972DEB406A00F205C4 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 3A7916962DEB406A00F205C4 /* ComposableArchitecture */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,8 +44,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A5793DD2DEB16EA0010CBDC /* FirebaseCore in Frameworks */,
-				3A5793DA2DEB16AB0010CBDC /* ComposableArchitecture in Frameworks */,
 				3A5793DF2DEB16EA0010CBDC /* FirebaseFirestore in Frameworks */,
+				3A7916972DEB406A00F205C4 /* ComposableArchitecture in Frameworks */,
 				3A5793E12DEB16EA0010CBDC /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -89,10 +89,10 @@
 			);
 			name = Quiz;
 			packageProductDependencies = (
-				3A5793D92DEB16AB0010CBDC /* ComposableArchitecture */,
 				3A5793DC2DEB16EA0010CBDC /* FirebaseCore */,
 				3A5793DE2DEB16EA0010CBDC /* FirebaseFirestore */,
 				3A5793E02DEB16EA0010CBDC /* FirebaseRemoteConfig */,
+				3A7916962DEB406A00F205C4 /* ComposableArchitecture */,
 			);
 			productName = Quiz;
 			productReference = 3AD4830A2DEB150A00E5371C /* Quiz.app */;
@@ -123,8 +123,8 @@
 			mainGroup = 3AD483012DEB150A00E5371C;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				3A5793D82DEB16AB0010CBDC /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				3A5793DB2DEB16EA0010CBDC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				3A7916952DEB406A00F205C4 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3AD4830B2DEB150A00E5371C /* Products */;
@@ -381,14 +381,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3A5793D82DEB16AB0010CBDC /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.20.2;
-			};
-		};
 		3A5793DB2DEB16EA0010CBDC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -397,14 +389,17 @@
 				minimumVersion = 11.13.0;
 			};
 		};
+		3A7916952DEB406A00F205C4 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = exactVersion;
+				version = 1.3.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3A5793D92DEB16AB0010CBDC /* ComposableArchitecture */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3A5793D82DEB16AB0010CBDC /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
-			productName = ComposableArchitecture;
-		};
 		3A5793DC2DEB16EA0010CBDC /* FirebaseCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3A5793DB2DEB16EA0010CBDC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -419,6 +414,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3A5793DB2DEB16EA0010CBDC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
+		};
+		3A7916962DEB406A00F205C4 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A7916952DEB406A00F205C4 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

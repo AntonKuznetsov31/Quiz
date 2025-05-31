@@ -6,12 +6,29 @@
 //
 
 import SwiftUI
+import Firebase
+import ComposableArchitecture
 
 @main
 struct QuizApp: App {
+    
+    init() {
+        FirebaseApp.configure()
+    }
+    
+    @State private var isQuizStarted = false
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                if isQuizStarted {
+                    StylistFocusView(store: Store(initialState: StylistFocusReducer.State(),
+                                     reducer: { StylistFocusReducer() }))
+                } else {
+                    IntroScreenView(store: Store(initialState: IntroScreenReducer.State(),
+                                                 reducer: { IntroScreenReducer() }))
+                }
+            }
         }
     }
 }

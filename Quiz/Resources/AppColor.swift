@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum AppColors {
+enum AppColor {
     
     // MARK: - Buttons
     static let primaryButtonBackgroundColor = Color(red: 24/255, green: 24/255, blue: 25/255, opacity: 1)

@@ -6,14 +6,14 @@
 "welcome_button_title" = "TAKE A QUIZ";
 
 /* MARK: - Stylist focus screen */
-"quiz_focus_navigation_bar_title" = "LIFESTYLE & INTERESTS";
+"quiz_focus_header_title" = "LIFESTYLE & INTERESTS";
 "quiz_focus_main_title" = "What'd you like our stylists to focus on?";
 "quiz_focus_subtitle" = "We offer services via live-chat mode";
 
 /* MARK: - Representable style screen */
-"quiz_style_navigation_bar_title" = "STYLE PREFERENCES";
+"quiz_style_header_title" = "STYLE PREFERENCES";
 "quiz_style_main_title" = "Which style best represents you?";
 
 /* MARK: - Favourite colors screen */
-"quiz_colors_navigation_bar_title" = "STYLE PREFERENCES";
+"quiz_colors_header_title" = "STYLE PREFERENCES";
 "quiz_colors_main_title" = "Choose favourite colors";
