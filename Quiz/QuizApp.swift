@@ -20,13 +20,61 @@ struct QuizApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                if isQuizStarted {
-                    StylistFocusView(store: Store(initialState: StylistFocusReducer.State(),
-                                     reducer: { StylistFocusReducer() }))
-                } else {
-                    IntroScreenView(store: Store(initialState: IntroScreenReducer.State(),
-                                                 reducer: { IntroScreenReducer() }))
+            QuizAppView()
+        }
+    }
+}
+
+enum QuizScreen: Hashable {
+    case focus
+    case style
+    case color
+}
+
+struct QuizAppView: View {
+    
+    @State private var path: [QuizScreen] = []
+    
+    var body: some View {
+        NavigationStack(path: $path) {
+            IntroScreenView(
+                store: Store(
+                    initialState: IntroScreenReducer.State(),
+                    reducer: { IntroScreenReducer() }
+                ),
+                onNext: { _ in
+                    path.append(.focus)
+                }
+            )
+            .navigationDestination(for: QuizScreen.self) { screen in
+                switch screen {
+                case .focus:
+                    StylistFocusView(
+                        store: Store(
+                            initialState: StylistFocusReducer.State(),
+                            reducer: { StylistFocusReducer() }
+                        ),
+                        onNext: { path.append(.style) },
+                        onBack: { path.removeLast() }
+                    )
+                case .style:
+                    RepresentStyleView(
+                        store: Store(
+                            initialState: RepresentStyleReducer.State(),
+                            reducer: { RepresentStyleReducer() }
+                        ),
+                        onNext: { path.append(.color) },
+                        onBack: { path.removeLast() }
+                    )
+                case .color:
+                    FavouriteColorView(
+                        store: Store(
+                            initialState: FavouriteColorReducer.State(),
+                            reducer: { FavouriteColorReducer() }
+                        ),
+                        onComplete: { path = [] },
+                        onBack: { path.removeLast() }
+                    )
                 }
             }
         }

@@ -15,11 +15,11 @@ final class MockQuizDataService: QuizDataServiceProtocol {
             .init(id: "1002", title: "Define color palette", description: "to enhance my natural features"),
             .init(id: "1003", title: "Create a seasonal capsule", description: "to curate effortless and elegant looks"),
             .init(id: "1004", title: "Define my style", description: "to discover my signature look"),
-            .init(id: "1004", title: "Create an outfit for an event", description: "to own a spotlight wherever you go")
+            .init(id: "1005", title: "Create an outfit for an event", description: "to own a spotlight wherever you go")
         ]
     }
     
-    // I've tried to upload pictures to the Firebase storage but I have some troubles with adding my bank's card in the google account (which is required to use the Firebase storage), so I decided to use the imgur service instead
+    // I've tried to upload pictures to the Firebase storage but I have some troubles with adding my bank's card in the google account (which is required to use the Firebase storage), so I've decided to use the imgur service instead
     func fetchStyleOptions() async throws -> [RepresentStyle] {
         return [
             .init(id: "2001", title: "SEXY", imageUrl: "https://i.imgur.com/tMXFVFz.png"),
@@ -32,11 +32,11 @@ final class MockQuizDataService: QuizDataServiceProtocol {
     
     func fetchColorOptions() async throws -> [FavouriteColor] {
         return [
-            .init(name: "LIGHT BLUE", color: "#ABE2FF"),
-            .init(name: "BLUE", color: "#5EA8FF"),
-            .init(name: "INDIGO", color: "#2237A8"),
-            .init(name: "TURQUOISE", color: "#69D1ED"),
-            .init(name: "MINT", color: "#87DBC8")
+            .init(id: "3001", name: "LIGHT BLUE", color: "#ABE2FF"),
+            .init(id: "3002", name: "BLUE", color: "#5EA8FF"),
+            .init(id: "3003", name: "INDIGO", color: "#2237A8"),
+            .init(id: "3004", name: "TURQUOISE", color: "#69D1ED"),
+            .init(id: "3005", name: "MINT", color: "#87DBC8")
         ]
     }
 }

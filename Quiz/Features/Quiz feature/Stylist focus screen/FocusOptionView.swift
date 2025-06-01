@@ -17,7 +17,7 @@ struct FocusOptionView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 1) {
                     Text(option.title.uppercased())
-                        .font(AppFont.poppinsSemiBold(size: 13))
+                        .font(AppFont.poppinsMedium(size: 13))
                     Text(option.description)
                         .font(AppFont.poppinsLight(size: 14))
                 }
@@ -25,7 +25,7 @@ struct FocusOptionView: View {
                 
                 Spacer()
                 
-                Image(isSelected ? "check_box" : "сheck_box_empty")
+                Image(isSelected ? "check_box" : "check_box_empty")
                     .resizable()
                     .frame(width: 20, height: 20)
             }
@@ -35,5 +35,6 @@ struct FocusOptionView: View {
                     .stroke(Color.gray.opacity(isSelected ? 1 : 0.4), lineWidth: 1)
             )
         }
+        .frame(height: 72)
     }
 }

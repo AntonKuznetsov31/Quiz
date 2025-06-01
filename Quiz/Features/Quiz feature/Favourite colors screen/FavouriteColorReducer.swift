@@ -1,27 +1,27 @@
 //
-//  StylistFocusReducer.swift
+//  FavouriteColorReducer.swift
 //  Quiz
 //
-//  Created by Anton Kuznetsov on 31.05.2025.
+//  Created by Anton Kuznetsov on 01.06.2025.
 //
 
 import SwiftUI
 import ComposableArchitecture
 
-struct StylistFocusReducer: Reducer {
+struct FavouriteColorReducer: Reducer {
+    
     struct State: Equatable {
-        var focusOptions: [StylistFocus] = []
-        var selectedOptionsIDs: [String] = []
+        var colorOptions: [FavouriteColor] = []
+        var selectedColorIDs: [String] = []
         var isLoading = false
-        var errorMessage: String?
+        var errorMessage: String? = nil
     }
     
     enum Action: Equatable {
         case onAppear
-        case dataLoaded([StylistFocus])
+        case dataLoaded([FavouriteColor])
         case loadError(String)
-        case toggleSelection(String)
-        case didTapContinue
+        case toggleColor(String)
     }
     
     @Dependency(\.quizDataService) var quizDataService
@@ -36,34 +36,31 @@ struct StylistFocusReducer: Reducer {
                 state.isLoading = true
                 return .run { send in
                     do {
-                        let result = try await quizDataService.fetchStylistFocus()
+                        let result = try await quizDataService.fetchColorOptions()
                         await send(.dataLoaded(result))
                     } catch {
                         await send(.loadError(error.localizedDescription))
                     }
                 }
                 
-            case .dataLoaded(let data):
+            case let .dataLoaded(colors):
                 state.isLoading = false
-                state.focusOptions = data
-                state.selectedOptionsIDs = quizUserDefaultsService.getFocusOptionsIDs()
+                state.colorOptions = colors
+                state.selectedColorIDs = quizUserDefaultsService.getColorOptionsIDs()
                 return .none
                 
-            case let .toggleSelection(id):
-                if state.selectedOptionsIDs.contains(id) {
-                    state.selectedOptionsIDs.removeAll { $0 == id }
-                } else {
-                    state.selectedOptionsIDs.append(id)
-                }
-                quizUserDefaultsService.setFocusOptionsIDs(state.selectedOptionsIDs)
-                return .none
-                
-            case .loadError(let error):
+            case let .loadError(error):
                 state.isLoading = false
                 state.errorMessage = error
                 return .none
                 
-            case .didTapContinue:
+            case let .toggleColor(id):
+                if state.selectedColorIDs.contains(id) {
+                    state.selectedColorIDs.removeAll { $0 == id }
+                } else {
+                    state.selectedColorIDs.append(id)
+                }
+                quizUserDefaultsService.setColorOptionsIDs(Array(state.selectedColorIDs))
                 return .none
             }
         }

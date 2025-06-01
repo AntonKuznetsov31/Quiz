@@ -1,31 +1,29 @@
 //
-//  StylistFocusView.swift
+//  RepresentStyleView.swift
 //  Quiz
 //
-//  Created by Anton Kuznetsov on 31.05.2025.
+//  Created by Anton Kuznetsov on 01.06.2025.
 //
 
 import SwiftUI
 import ComposableArchitecture
 
-struct StylistFocusView: View {
+struct RepresentStyleView: View {
     
-    let store: StoreOf<StylistFocusReducer>
+    let store: StoreOf<RepresentStyleReducer>
     
     let onNext: () -> Void
     let onBack: () -> Void
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-            VStack(spacing: 0) {
-                headerView
+            VStack(alignment: .leading, spacing: 0) {
+                mainTitle
                 scrollView(viewStore)
                 continueButton(viewStore)
             }
             .padding(.horizontal, 20)
-            .onAppear {
-                viewStore.send(.onAppear)
-            }
+            .onAppear { viewStore.send(.onAppear) }
             .navigationBarBackButtonHidden()
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -45,30 +43,30 @@ struct StylistFocusView: View {
         }
     }
     
+    var mainTitle: some View {
+        Text("quiz_style_main_title")
+            .font(AppFont.kaiseiTokuminRegular(size: 26))
+            .padding(.bottom, 24)
+            .multilineTextAlignment(.leading)
+    }
+    
     var navigationTitle: some View {
-        Text("quiz_focus_navigation_title")
+        Text("quiz_style_navigation_title")
             .font(AppFont.poppinsRegular(size: 14))
     }
     
-    var headerView: some View {
-        VStack(alignment: .leading) {
-            Text("quiz_focus_main_title")
-                .font(AppFont.kaiseiTokuminRegular(size: 26))
-            Text("quiz_focus_subtitle")
-                .font(AppFont.poppinsLight(size: 14))
-        }
-        .padding(.bottom, 24)
-    }
-    
-    func scrollView(_ viewStore: ViewStoreOf<StylistFocusReducer>) -> some View {
+    private func scrollView(_ viewStore: ViewStoreOf<RepresentStyleReducer>) -> some View {
         ScrollView {
-            VStack(spacing: 12) {
-                ForEach(viewStore.focusOptions) { option in
-                    FocusOptionView(
-                        option: option,
-                        isSelected: viewStore.selectedOptionsIDs.contains(option.id),
+            LazyVGrid(columns: [
+                GridItem(.flexible(), spacing: 12),
+                GridItem(.flexible(), spacing: 12)
+            ], spacing: 12) {
+                ForEach(viewStore.styleOptions) { style in
+                    RepresentStyleOptionView(
+                        isSelected: viewStore.selectedStyleID == style.id,
+                        style: style,
                         onTap: {
-                            viewStore.send(.toggleSelection(option.id))
+                            viewStore.send(.selectStyle(style.id))
                         }
                     )
                 }
@@ -78,7 +76,7 @@ struct StylistFocusView: View {
         .frame(maxHeight: .infinity)
     }
     
-    func continueButton(_ viewStore: ViewStoreOf<StylistFocusReducer>) -> some View {
+    private func continueButton(_ viewStore: ViewStoreOf<RepresentStyleReducer>) -> some View {
         AppButton(
             title: "continue_button_title",
             backgroundColor: AppColor.primaryButtonBackgroundColor,

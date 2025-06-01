@@ -1,24 +1,24 @@
 //
-//  StylistFocusView.swift
+//  FavouriteColorsView.swift
 //  Quiz
 //
-//  Created by Anton Kuznetsov on 31.05.2025.
+//  Created by Anton Kuznetsov on 01.06.2025.
 //
 
 import SwiftUI
 import ComposableArchitecture
 
-struct StylistFocusView: View {
+struct FavouriteColorView: View {
     
-    let store: StoreOf<StylistFocusReducer>
+    let store: StoreOf<FavouriteColorReducer>
     
-    let onNext: () -> Void
+    let onComplete: () -> Void
     let onBack: () -> Void
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             VStack(spacing: 0) {
-                headerView
+                mainTitle
                 scrollView(viewStore)
                 continueButton(viewStore)
             }
@@ -46,29 +46,30 @@ struct StylistFocusView: View {
     }
     
     var navigationTitle: some View {
-        Text("quiz_focus_navigation_title")
+        Text("quiz_style_navigation_title")
             .font(AppFont.poppinsRegular(size: 14))
     }
     
-    var headerView: some View {
-        VStack(alignment: .leading) {
-            Text("quiz_focus_main_title")
-                .font(AppFont.kaiseiTokuminRegular(size: 26))
-            Text("quiz_focus_subtitle")
-                .font(AppFont.poppinsLight(size: 14))
-        }
-        .padding(.bottom, 24)
+    var mainTitle: some View {
+        Text("quiz_colors_main_title")
+            .font(AppFont.kaiseiTokuminRegular(size: 26))
+            .padding(.bottom, 24)
+            .frame(maxWidth: .infinity, alignment: .leading)
     }
     
-    func scrollView(_ viewStore: ViewStoreOf<StylistFocusReducer>) -> some View {
+    private func scrollView(_ viewStore: ViewStoreOf<FavouriteColorReducer>) -> some View {
         ScrollView {
-            VStack(spacing: 12) {
-                ForEach(viewStore.focusOptions) { option in
-                    FocusOptionView(
-                        option: option,
-                        isSelected: viewStore.selectedOptionsIDs.contains(option.id),
+            LazyVGrid(columns: [
+                GridItem(.fixed(108), spacing: 12),
+                GridItem(.fixed(108), spacing: 12),
+                GridItem(.fixed(108), spacing: 12)
+            ], spacing: 12) {
+                ForEach(viewStore.colorOptions) { color in
+                    FavouriteColorOptionView(
+                        isSelected: viewStore.selectedColorIDs.contains(color.id),
+                        color: color,
                         onTap: {
-                            viewStore.send(.toggleSelection(option.id))
+                            viewStore.send(.toggleColor(color.id))
                         }
                     )
                 }
@@ -78,14 +79,13 @@ struct StylistFocusView: View {
         .frame(maxHeight: .infinity)
     }
     
-    func continueButton(_ viewStore: ViewStoreOf<StylistFocusReducer>) -> some View {
+    private func continueButton(_ viewStore: ViewStoreOf<FavouriteColorReducer>) -> some View {
         AppButton(
             title: "continue_button_title",
             backgroundColor: AppColor.primaryButtonBackgroundColor,
             foregroundColor: AppColor.darkModeTextColor
         ) {
-            viewStore.send(.didTapContinue)
-            onNext()
+            // TODO: - add destination
         }
         .padding(.bottom, 22)
     }

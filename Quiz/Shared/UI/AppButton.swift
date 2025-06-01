@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct AppButton: View {
+    
     let title: String
     var backgroundColor: Color = AppColor.darkModeButtonBackgroundColor
     var foregroundColor: Color = AppColor.primaryTextColor
-    var font: Font = AppFont.poppinsBold(size: 14)
+    var font: Font = AppFont.poppinsRegular(size: 14)
     let action: () -> Void
     
     var body: some View {
@@ -23,6 +24,5 @@ struct AppButton: View {
                 .padding()
                 .background(backgroundColor)
         }
-        .padding(.horizontal)
     }
 }

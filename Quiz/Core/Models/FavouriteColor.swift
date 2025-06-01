@@ -8,11 +8,12 @@
 import Foundation
 
 struct FavouriteColor: Codable, Identifiable, Equatable {
-    var id: UUID { UUID() }
+    let id: String
     let name: String
     let color: String
     
-    init(name: String, color: String) {
+    init(id: String, name: String, color: String) {
+        self.id = name
         self.name = name
         self.color = color
     }

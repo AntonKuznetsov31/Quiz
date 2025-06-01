@@ -8,7 +8,6 @@
 import ComposableArchitecture
 
 enum QuizDataServiceKey: DependencyKey {
-//    static let liveValue: QuizDataServiceProtocol = FirebaseQuizDataService()
     static let liveValue: QuizDataServiceProtocol = RemoteConfigQuizDataService()
 }
 
